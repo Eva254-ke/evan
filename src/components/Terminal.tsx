@@ -22,13 +22,19 @@ Security: Cryptography, Secure Multi-party Computation
 Autonomous Systems: Reinforcement Learning, Multi-agent Systems
 Cloud/DevOps: Azure, AWS, Docker, Kubernetes`,
 
-  projects: `Project 1: Autonomous Threat Detection
-- Used reinforcement learning to identify threats in real-time.
-- Reduced incident response time by 45%.
-  
-Project 2: Secure Intelligent Agents
-- Developed secure multi-agent systems.
-- Enhanced predictive accuracy and system trust.`,
+  projects: `1. NexaRealty
+   Used Flutter and Unity XR SDKs to build a scalable AR/VR science education platform, enabling immersive 3D learning and reducing dev cycle time by 30%.
+   Impact: Validated core interactions for cross-platform deployment (Android/iOS/XR).
+
+2. Roombaya
+   Applied AI-driven recommendations and real-time analytics (Python, Firebase) to increase hotel booking value by 20% and provide actionable conversion insights.
+   Impact: Built predictive models for abandonment detection, boosting direct revenue.
+   https://roombaya.com/
+
+3. JoyBeautty
+   Developed a mobile-first spa booking platform (React, Node.js) with AI demand prediction, increasing appointment uptake by 40% and reducing no-shows by 25%.
+   Impact: Optimized staff scheduling and improved user experience across devices.
+   https://joybeautty.com/`,
 
   contact: `Email: zachariah.evans@example.com
 LinkedIn: linkedin.com/in/zachariahevans
@@ -61,8 +67,8 @@ export default function Terminal() {
   const [lines, setLines] = useState<string[]>([
     "evans@portfolio:~$ welcome",
     "Hi, I'm Zachariah Evans, an AI Software Engineer.",
-    "I specialize in secure intelligent systems and autonomous agent development, passionate about crafting AI solutions that combine innovation with security.",
-    "Type 'help' to see available commands."
+    "Welcome and explore my portfolio, discover my skills, projectsand get in touch. Type 'help' to see what you can do!",
+    "AI powered terminal!."
   ]);
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -107,15 +113,16 @@ export default function Terminal() {
   <nav className="bg-black text-green-400 font-mono px-4 py-3 md:px-6 md:py-4 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-green-700">
         <div className="mb-2 md:mb-0">
           <span className="text-lg font-bold block">Zachariah Evans</span>
-          <span className="text-sm block mt-1">AI Software Engineer</span>
+          <span className="text-sm block mt-1 text-white">AI Software Engineer</span>
         </div>
         <div className="flex flex-wrap items-center space-x-2 md:space-x-4">
           <span className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 text-black font-extrabold text-base px-4 py-2 rounded shadow-lg border-2 border-green-600 mr-4 animate-pulse">
             Let me launch your MVP quickly.
           </span>
           <a
-            href="/resume.pdf"
-            download
+            href="https://drive.google.com/uc?export=download&id=18oE40EY1lV9LMXzCuHFODgdKdH3jwRl8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-green-400 text-white px-4 py-2 rounded font-bold shadow-lg border-2 border-green-600 hover:bg-green-500 transition-colors"
             style={{ textDecoration: 'none' }}
           >
@@ -184,9 +191,22 @@ export default function Terminal() {
               }
               // Section content white
               if (i > 2) {
-                return (
-                  <pre key={i} className="whitespace-pre-wrap text-white mb-2">{line}</pre>
-                );
+                // Always render URLs in the projects output as blue clickable links
+                if (lines.some(l => l.includes('NexaRealty') || l.includes('Roombaya') || l.includes('JoyBeautty'))) {
+                  // Replace URLs with blue colored anchor tags using inline style and <font color> for guaranteed color
+                  const withLinks = line.replace(/(https?:\/\/[\w\-\.]+\.[a-zA-Z]{2,}(?:[\w\-\.\/?=&%#]*)?)/g, (url) =>
+                    `<a href='${url}' target='_blank' rel='noopener noreferrer' style='color:#60a5fa;text-decoration:underline'><font color='#60a5fa'>${url}</font></a>`
+                  );
+                  return (
+                    <pre key={i} className="whitespace-pre-wrap text-white mb-2">
+                      <span dangerouslySetInnerHTML={{ __html: withLinks }} />
+                    </pre>
+                  );
+                } else {
+                  return (
+                    <pre key={i} className="whitespace-pre-wrap text-white mb-2">{line}</pre>
+                  );
+                }
               }
               // Default: fallback
               return (
@@ -209,14 +229,16 @@ export default function Terminal() {
           </form>
         </div>
       </div>
-  <footer className="bg-black text-green-400 font-mono px-4 py-2 md:px-6 border-t border-green-700 relative text-xs md:text-base">
-        {mounted && (
-          <div className="absolute right-6 bottom-2 text-green-400">
-            {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
-          </div>
-        )}
-        <div>&copy; {new Date().getFullYear()} Zachariah Evans. All rights reserved.</div>
-      </footer>
+  <footer className="bg-black text-green-400 font-mono px-4 py-2 md:px-6 border-t border-green-700 flex flex-col md:flex-row items-center justify-between gap-2 text-xs md:text-base w-full">
+    <div className="flex flex-col md:flex-row items-center w-full justify-between">
+      <div className="mb-1 md:mb-0 text-center md:text-left w-full md:w-auto">&copy; {new Date().getFullYear()} Zachariah Evans. All rights reserved.</div>
+      {mounted && (
+        <div className="text-green-400 text-center md:text-right w-full md:w-auto">
+          {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
+        </div>
+      )}
+    </div>
+  </footer>
     </div>
   );
 }

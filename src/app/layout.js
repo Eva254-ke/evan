@@ -23,6 +23,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+            <head>
+              <meta charSet="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Zachariah Evans</title>
+              <link rel="icon" href="https://i.ibb.co/tT4cxDGX/pass.jpg" />
+            </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

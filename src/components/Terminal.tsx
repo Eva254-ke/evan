@@ -67,7 +67,7 @@ export default function Terminal() {
   const [lines, setLines] = useState<string[]>([
     "evans@portfolio:~$ welcome",
     "Hi, I'm Zachariah Evans, an AI Software Engineer.",
-    "Welcome and explore my portfolio, discover my skills, projectsand get in touch. Type 'help' to see what you can do!",
+    "Welcome and explore my portfolio, discover my skills, projects and get in touch. Type 'help' to see what you can do!",
     "AI powered terminal!."
   ]);
   const [input, setInput] = useState('');
